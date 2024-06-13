@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Login Example</title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="459988457808-31fj7minedae7opvsvjn0m3ked9gsdke.apps.googleusercontent.com.apps.googleusercontent.com">
+    <script>
+        function onSignIn(googleUser) {
+            // Obtenha o token JWT tokenId
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+
+            // Mostre o tokenId na página
+            document.getElementById('token').innerText = id_token;
+        }
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+                document.getElementById('token').innerText = '';
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Google Login Example</h2>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <p>ID Token: <span id="token"></span></p>
+    <button onclick="signOut()">Sign out</button>
+</body>
+</html>
